@@ -26,4 +26,3 @@ export async function createUser(prevState: any, formData: FormData) {
     return { error: 'Failed to create user' }
   }
 } 
-
