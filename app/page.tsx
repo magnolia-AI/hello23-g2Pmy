@@ -1,28 +1,46 @@
-'use client'
-import { Button } from '@/components/ui/button'
-import { Card, CardContent } from '@/components/ui/card'
-import { useToast } from "@/hooks/use-toast"
+import { getUsers } from '@/app/actions/users'
+import { UserForm } from '@/app/components/user-form'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { users as usersSchema } from '@/lib/schema'
 
-{/* 
-  TEMPLATE PAGE: Home
-  This is a template home page.
-  Replace all content with content that suits the users request.
-*/}
-export default function Home() {
-  const { toast } = useToast()
+export default async function Home() {
+  const users = await getUsers()
+
   return (
     <div className="min-h-full">
+      <section className="container mx-auto px-4 pt-12 pb-20">
+        <div className="max-w-4xl mx-auto">
+          <Card className="mb-8">
+            <CardHeader>
+              <CardTitle>Add a New User</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <UserForm />
+            </CardContent>
+          </Card>
 
-      <section className="container mx-auto px-4 pt-24 pb-20">
-        <div className="max-w-[800px] mx-auto text-center">
-          <h1 className="text-5xl font-bold tracking-tight lg:text-6xl">
-            Template Starter
-          </h1>
-          <p className="mt-6 text-xl text-muted-foreground max-w-[600px] mx-auto">
-            This is a customizable template. Replace all content with your own using the chat interface.
-          </p>
+          <Card>
+            <CardHeader>
+              <CardTitle>User List</CardTitle>
+            </CardHeader>
+            <CardContent>
+              {users.length > 0 ? (
+                <ul className="space-y-4">
+                  {users.map((user) => (
+                    <li key={user.id} className="p-4 border rounded-md shadow-sm">
+                      <p className="font-semibold">{user.name}</p>
+                      <p className="text-sm text-muted-foreground">{user.email}</p>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p>No users found. Add one using the form above.</p>
+              )}
+            </CardContent>
+          </Card>
         </div>
       </section>
     </div>
   )
 }
+
