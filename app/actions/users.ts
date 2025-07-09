@@ -25,5 +25,5 @@ export async function createUser(prevState: any, formData: FormData) {
     console.error('Error creating user:', error)
     return { error: 'Failed to create user' }
   }
-}
+} 
 
