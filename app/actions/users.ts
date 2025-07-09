@@ -1,6 +1,6 @@
 'use server'
 
-import db from '@/lib/db'
+import { db } from '@/lib/db'
 import { users } from '@/lib/schema'
 import { revalidatePath } from 'next/cache'
 
@@ -9,7 +9,7 @@ export async function getUsers() {
   return data
 }
 
-export async function createUser(formData: FormData) {
+export async function createUser(prevState: any, formData: FormData) {
   const name = formData.get('name') as string
   const email = formData.get('email') as string
 
