@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { db } from '@/lib/db';
+import db  from '@/lib/db';
 import { migrate } from 'drizzle-orm/neon-http/migrator';
 
 export async function GET() {
